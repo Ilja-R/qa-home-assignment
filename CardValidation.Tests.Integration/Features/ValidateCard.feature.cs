@@ -88,7 +88,7 @@ namespace CardValidation.Tests.Integration.Features
 #line 4
 #line hidden
 #line 5
- await testRunner.GivenAsync("validation endpoint is used", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.GivenAsync("a credit card needs to be validated", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
         }
         

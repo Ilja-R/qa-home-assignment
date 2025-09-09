@@ -31,8 +31,8 @@ namespace CardValidation.Tests.Integration.StepDefinitions
             };
         }
 
-        [Given("validation endpoint is used")]
-        public void GivenValidationEndpointIsUsed()
+        [Given("a credit card needs to be validated")]
+        public void GivenACreditCardNeedsToBeValidated()
         {
             _currentEndpoint = "/CardValidation/card/credit/validate";
         }
