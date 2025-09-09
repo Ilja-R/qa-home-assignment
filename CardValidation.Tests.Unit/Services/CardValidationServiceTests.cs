@@ -13,7 +13,7 @@ public class CardValidationServiceTests
     public void ValidateOwner_ValidOwner_ReturnsTrue(string validOwner)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
 
         // Act
         var result = service.ValidateOwner(validOwner);
@@ -32,7 +32,7 @@ public class CardValidationServiceTests
     public void ValidateOwner_InvalidOwner_ReturnsFalse(string invalidOwner, string reason)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
 
         // Act
         var result = service.ValidateOwner(invalidOwner);
@@ -45,7 +45,7 @@ public class CardValidationServiceTests
     public void ValidateOwner_LongName_ReturnsFalse()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         const string longName = "John Doe Smith Johnson";
         
         // Act
@@ -62,7 +62,7 @@ public class CardValidationServiceTests
     public void ValidateOwner_EmptyName_ReturnsFalse(string emptyName)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         
         // Act
         var result = service.ValidateOwner(emptyName);
@@ -75,7 +75,7 @@ public class CardValidationServiceTests
     public void ValidateOwner_ThrownException_WhenNull()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => service.ValidateOwner(null!));
@@ -87,7 +87,7 @@ public class CardValidationServiceTests
     public void ValidateCvs_ValidCvc_ReturnsTrue(string validCvc)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
 
         // Act
         var result = service.ValidateCvc(validCvc);
@@ -105,7 +105,7 @@ public class CardValidationServiceTests
     public void ValidateCvs_InvalidCvc_ReturnsFalse(string invalidCvc, string reason)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
 
         // Act
         var result = service.ValidateCvc(invalidCvc);
@@ -118,7 +118,7 @@ public class CardValidationServiceTests
     public void ValidateCvs_ThrownException_WhenNull()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => service.ValidateCvc(null!));
@@ -128,7 +128,7 @@ public class CardValidationServiceTests
     public void ValidateIssueDate_CurrentMonth_ReturnsTrue()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         var currentMonth = DateTime.UtcNow.ToString("MM\\/yyyy");
 
         // Act
@@ -142,7 +142,7 @@ public class CardValidationServiceTests
     public void ValidateIssueDate_NextMonthLongFormat_ReturnsTrue()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         var nextMonth = DateTime.UtcNow.AddMonths(1).ToString("MM\\/yyyy");
 
         // Act
@@ -156,7 +156,7 @@ public class CardValidationServiceTests
     public void ValidateIssueDate_NextMonthShortFormat_ReturnsTrue()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         var nextMonth = DateTime.UtcNow.AddMonths(1).ToString("MM\\/yy");
 
         // Act
@@ -170,7 +170,7 @@ public class CardValidationServiceTests
     public void ValidateIssueDate_NextMonthShortFormatSimplified_ReturnsTrue()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         var nextMonth = DateTime.UtcNow.AddMonths(1).ToString("MMyy");
 
         // Act
@@ -184,7 +184,7 @@ public class CardValidationServiceTests
     public void ValidateIssueDate_NextMonthLongFormatSimplified_ReturnsTrue()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         var nextMonth = DateTime.UtcNow.AddMonths(1).ToString("MMyyyy");
 
         // Act
@@ -198,7 +198,7 @@ public class CardValidationServiceTests
     public void ValidateIssueDate_PastMonthLongFormat_ReturnsFalse()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         var pastMonth = DateTime.UtcNow.AddMonths(-1).ToString("MM\\/yyyy");
 
         // Act
@@ -212,7 +212,7 @@ public class CardValidationServiceTests
     public void ValidateIssueDate_PastMonthShortFormat_ReturnsFalse()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         var pastMonth = DateTime.UtcNow.AddMonths(-1).ToString("MM\\/yy");
 
         // Act
@@ -232,7 +232,7 @@ public class CardValidationServiceTests
     public void ValidateIssueDate_InvalidFormat_ReturnsFalse(string invalidDate)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         
         // Act
         var result = service.ValidateIssueDate(invalidDate);
@@ -245,7 +245,7 @@ public class CardValidationServiceTests
     public void ValidateIssueDate_ThrownException_WhenNull()
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => service.ValidateIssueDate(null!));
@@ -257,7 +257,7 @@ public class CardValidationServiceTests
     public void GetPaymentSystemType_ValidVisaNumber_ReturnsVisaPaymentSystemType(string cardNumber)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         
         // Act
         var result = service.GetPaymentSystemType(cardNumber);
@@ -273,7 +273,7 @@ public class CardValidationServiceTests
     public void GetPaymentSystemType_ValidMasterCardNumber_ReturnsMasterCardPaymentSystemType(string cardNumber)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         
         // Act
         var result = service.GetPaymentSystemType(cardNumber);
@@ -288,7 +288,7 @@ public class CardValidationServiceTests
     public void GetPaymentSystemType_ValidAmericanExpressNumber_ReturnsAmericanExpressPaymentSystemType(string cardNumber)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
         
         // Act
         var result = service.GetPaymentSystemType(cardNumber);
@@ -308,7 +308,7 @@ public class CardValidationServiceTests
     public void GetPaymentSystemType_InvalidCardNumber_ThrowsNotImplementedException(string cardNumber)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
 
         // Act & Assert
         Assert.Throws<NotImplementedException>(() => service.GetPaymentSystemType(cardNumber));
@@ -325,7 +325,7 @@ public class CardValidationServiceTests
     public void ValidateNumber_ValidCard_ReturnsTrue(string cardNumber)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
 
         // Act
         var result = service.ValidateNumber(cardNumber);
@@ -345,12 +345,17 @@ public class CardValidationServiceTests
     public void ValidateNumber_InvalidCardNumber_ReturnsFalse(string cardNumber)
     {
         // Arrange
-        var service = new CardValidationService();
+        var service = CreateService();
 
         // Act
         var result = service.ValidateNumber(cardNumber);
         
         // Assert
         Assert.False(result, "Card number is not valid for any known payment system");
+    }
+    
+    private static CardValidationService CreateService()
+    {
+        return new CardValidationService();
     }
 }

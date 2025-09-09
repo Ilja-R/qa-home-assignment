@@ -2,7 +2,7 @@
 	The api should validate a credit card and return an error or a payment system code
 
 Background:
-	Given validation endpoint is used
+	Given a credit card needs to be validated
 
 # NB!!! This test should pass, remove @ignore as soon as fix is applied
 @ignore @card_validation
